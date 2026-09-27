@@ -1,0 +1,26 @@
+{
+  "schemaVersion": 1,
+  "repository": "edburns/edburns-dd-3069621-cargotracker-linux-x64",
+  "repositoryUrl": "https://github.com/edburns/edburns-dd-3069621-cargotracker-linux-x64",
+  "startedAt": "2026-09-27T19:50:48Z",
+  "completedAt": "2026-09-27T22:07:45Z",
+  "lessonPropagation": "off",
+  "sourceBranch": "20260902-2104Z-commit-e7b651f-liberty",
+  "baselineBranch": "experiment/shepherd-shared-baseline",
+  "baselineSha": "9b9f311b2a3a2854bdac947593950d9edb6bca7d",
+  "target": "/home/edburns/workareas/edburns-dd-3069621-cargotracker-linux-x64-shepherd-target",
+  "branch": "experiment/shepherd-control",
+  "worktree": "/home/edburns/workareas/edburns-dd-3069621-cargotracker-linux-x64-shepherd-control",
+  "campaignDirectory": "/home/edburns/workareas/edburns-dd-3069621-cargotracker-linux-x64-shepherd-control/1-arrival-deadline-control-remove-before-merge",
+  "issues": [
+    2,
+    3,
+    4,
+    5,
+    6
+  ],
+  "handoff": "/home/edburns/workareas/edburns-dd-3069621-cargotracker-linux-x64-shepherd-control/1-arrival-deadline-control-remove-before-merge/prompts/shepherd-task-20-20260927-1951/shepherd-test-experiment-handoff.json",
+  "runDirectory": "/home/edburns/workareas/edburns-dd-3069621-cargotracker-linux-x64-shepherd-control/1-arrival-deadline-control-remove-before-merge/shepherd-tasks-6bf3de9a-4edf-4c6a-8f79-122254ff6847-20260927-1955",
+  "postMortem": "/home/edburns/workareas/edburns-dd-3069621-cargotracker-linux-x64-shepherd-control/1-arrival-deadline-control-remove-before-merge/shepherd-tasks-6bf3de9a-4edf-4c6a-8f79-122254ff6847-20260927-1955/20260927-2200-post-mortem.md",
+  "lessons": "/home/edburns/workareas/edburns-dd-3069621-cargotracker-linux-x64-shepherd-control/1-arrival-deadline-control-remove-before-merge/campaign-lessons.md"
+}
