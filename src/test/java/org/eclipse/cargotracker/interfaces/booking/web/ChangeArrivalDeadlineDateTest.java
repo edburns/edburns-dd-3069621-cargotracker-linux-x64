@@ -37,7 +37,7 @@ public class ChangeArrivalDeadlineDateTest {
     @Test
     public void loadConvertsFormattedDeadlineIntoEditableDate() throws Exception {
         RecordingBookingServiceFacade facade = new RecordingBookingServiceFacade();
-        facade.cargoToReturn = validCargoRoute("03/15/2014 12:00 PM CET");
+        facade.cargoToReturn = cargoRouteWithDateOnlyDeadline("03/15/2014");
         ChangeArrivalDeadlineDate bean = newBean(facade);
         bean.setTrackingId(TRACKING_ID);
 
@@ -51,9 +51,7 @@ public class ChangeArrivalDeadlineDateTest {
     @Test
     public void malformedDeadlineIsSurfacedRatherThanConvertedToNull() throws Exception {
         RecordingBookingServiceFacade facade = new RecordingBookingServiceFacade();
-        CargoRoute cargo = validCargoRoute("03/15/2014 12:00 PM CET");
-        corruptArrivalDeadline(cargo, "not-a-date");
-        facade.cargoToReturn = cargo;
+        facade.cargoToReturn = cargoRouteWithDateOnlyDeadline("not-a-date");
         ChangeArrivalDeadlineDate bean = newBean(facade);
         bean.setTrackingId(TRACKING_ID);
 
@@ -121,10 +119,23 @@ public class ChangeArrivalDeadlineDateTest {
         return new CargoRoute(TRACKING_ID, "USNYC", "DEHAM", deadline, false, false, "USNYC", "NOT_RECEIVED");
     }
 
-    private void corruptArrivalDeadline(CargoRoute cargo, String value) throws Exception {
-        Field field = CargoRoute.class.getDeclaredField("arrivalDeadline");
-        field.setAccessible(true);
-        field.set(cargo, value);
+    /**
+     * Returns a {@link CargoRoute} whose {@code getArrivalDeadlineDate()}
+     * returns exactly {@code dateOnlyValue}, while {@code getArrivalDeadline()}
+     * returns an unrelated formatted value. This proves {@code load()} parses
+     * the date-only getter specifically, not the full formatted deadline.
+     */
+    private CargoRoute cargoRouteWithDateOnlyDeadline(final String dateOnlyValue) throws Exception {
+        Date unrelatedDeadline = new SimpleDateFormat("MM/dd/yyyy hh:mm a z").parse("01/01/2000 12:00 AM CET");
+        return new CargoRoute(TRACKING_ID, "USNYC", "DEHAM", unrelatedDeadline,
+                false, false, "USNYC", "NOT_RECEIVED") {
+            private static final long serialVersionUID = 1L;
+
+            @Override
+            public String getArrivalDeadlineDate() {
+                return dateOnlyValue;
+            }
+        };
     }
 
     private ChangeArrivalDeadlineDate newBean(BookingServiceFacade facade) throws Exception {

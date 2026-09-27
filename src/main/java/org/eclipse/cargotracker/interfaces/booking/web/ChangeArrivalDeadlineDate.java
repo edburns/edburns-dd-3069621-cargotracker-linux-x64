@@ -57,7 +57,7 @@ public class ChangeArrivalDeadlineDate implements Serializable {
         cargo = bookingServiceFacade.loadCargoForRouting(trackingId);
         try {
             arrivalDeadlineDate = new SimpleDateFormat(DATE_PATTERN)
-                    .parse(cargo.getArrivalDeadline());
+                    .parse(cargo.getArrivalDeadlineDate());
         } catch (ParseException e) {
             throw new RuntimeException(
                     "Error parsing arrival deadline date", e);
