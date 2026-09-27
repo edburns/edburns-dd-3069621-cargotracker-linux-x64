@@ -65,6 +65,22 @@ public class ChangeArrivalDeadlineDateTest {
     }
 
     @Test
+    public void impossibleCalendarDateIsSurfacedRatherThanNormalized() throws Exception {
+        RecordingBookingServiceFacade facade = new RecordingBookingServiceFacade();
+        facade.cargoToReturn = cargoRouteWithDateOnlyDeadline("02/30/2014");
+        ChangeArrivalDeadlineDate bean = newBean(facade);
+        bean.setTrackingId(TRACKING_ID);
+
+        try {
+            bean.load();
+            fail("Expected impossible deadline to be surfaced instead of normalized");
+        } catch (RuntimeException expected) {
+            assertTrue(expected.getCause() instanceof java.text.ParseException);
+        }
+        assertNull(bean.getArrivalDeadlineDate());
+    }
+
+    @Test
     public void changeArrivalDeadlineDelegatesSelectedDateAndTrackingId() throws Exception {
         RecordingBookingServiceFacade facade = new RecordingBookingServiceFacade();
         ChangeArrivalDeadlineDate bean = newBean(facade);
