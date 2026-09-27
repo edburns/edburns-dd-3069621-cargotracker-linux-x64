@@ -36,6 +36,7 @@
 
                 <p:commandButton value="Update"
                                  action="#{changeArrivalDeadlineDate.changeArrivalDeadline()}"
+                                 process="@form"
                                  update="@form"
                                  oncomplete="if (args &amp;&amp; !args.validationFailed) window.location.replace(window.location.href);"/>
             </h:panelGrid>
